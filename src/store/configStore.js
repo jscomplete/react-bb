@@ -2,10 +2,9 @@ import * as Redux from 'redux';
 
 import mainReducer from './reducers';
 
-export default () => {
+export default ({ deals }) => {
   const store = Redux.createStore(mainReducer, {
-    counter: 42,
-    message: 'Hello from Redux',
+    deals
   });
 
   return store;

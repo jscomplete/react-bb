@@ -8,7 +8,7 @@ import App from '../components/App';
 
 import configStore from '../store/configStore';
 
-const store = configStore();
+const store = configStore(window.initialData);
 
 ReactDOM.hydrate(
   <Provider store={store}>

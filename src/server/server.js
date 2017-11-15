@@ -6,9 +6,9 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  const { initialMarkup } = serverRender();
-  res.render('index', { initialMarkup });
+app.get('/', async (req, res) => {
+  const { initialMarkup, initialData } = await serverRender();
+  res.render('index', { initialMarkup, initialData });
 });
 
 app.listen(3000, () => {
