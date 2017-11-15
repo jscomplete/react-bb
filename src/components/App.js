@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 // import { incrementCounter, decrementCounter } from '../store/actions';
 // import './App.css';
 
+import Summary from './Summary';
+import HideDeal from './HideDeal';
+
 class App extends Component {
   static propTypes = {
     deals: PropTypes.array.isRequired,
@@ -12,7 +15,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.props.deals.map((deal) => <div key={deal.key}>{deal.title}</div>)}
+        {this.props.deals.map((deal) =>
+          <div key={deal.key}>
+            {deal.title}
+            <HideDeal dealId={deal.key} />
+          </div>
+        )}
+        <Summary />
       </div>
     );
   }
