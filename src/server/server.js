@@ -1,6 +1,5 @@
-const express = require('express');
-// const React = require('react');
-// const ReactDOMServer = require('react-dom/server');
+import express from 'express';
+import serverRender from '../renderers/server';
 
 const app = express();
 app.use(express.static('public'));
@@ -8,7 +7,8 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const { initialMarkup } = serverRender();
+  res.render('index', { initialMarkup });
 });
 
 app.listen(3000, () => {
