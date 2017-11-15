@@ -23,6 +23,7 @@
     "babel-polyfill": "^6.26.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
