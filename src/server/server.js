@@ -3,6 +3,8 @@ const express = require('express');
 // const ReactDOMServer = require('react-dom/server');
 
 const app = express();
+app.use(express.static('public'));
+
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
