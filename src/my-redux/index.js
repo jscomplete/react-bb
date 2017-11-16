@@ -31,6 +31,17 @@ export const connect = (
       store: PropTypes.object.isRequired,
     };
 
+    constructor(props) {
+      super(props);
+      this.actionsMap = {};
+      Object.entries(_mapDispatchToProps).forEach(
+        ([actionName, actionFunction]) => {
+          this.actionsMap[actionName] = (...args) =>
+            this.context.store.dispatch(actionFunction.apply(this, args));
+        }
+      );
+    }
+
     componentDidMount() {
       this.unsubscribe = this.context.store.subscribe(this.onStoreChange);
     }
@@ -45,15 +56,8 @@ export const connect = (
 
     render() {
       const propsMap = _mapStateToProps(this.context.store.getState());
-      const actionsMap = {};
-      Object.entries(_mapDispatchToProps).forEach(
-        ([actionName, actionFunction]) => {
-          actionsMap[actionName] = (...args) =>
-            this.context.store.dispatch(actionFunction.apply(this, args));
-        }
-      );
 
-      return <WrappedComponent {...this.props} {...propsMap} {...actionsMap} />;
+      return <WrappedComponent {...this.props} {...propsMap} {...this.actionsMap} />;
     }
   };
 };

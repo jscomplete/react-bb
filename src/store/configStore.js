@@ -4,7 +4,8 @@ import mainReducer from './reducers';
 
 export default ({ deals }) => {
   const store = Redux.createStore(mainReducer, {
-    deals
+    deals,
+    time: new Date(),
   });
 
   return store;

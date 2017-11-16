@@ -10,6 +10,12 @@ import configStore from '../store/configStore';
 
 const store = configStore(window.initialData);
 
+setInterval(() => {
+  store.dispatch({
+    type: 'TICK_TIME',
+  });
+}, 1000);
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

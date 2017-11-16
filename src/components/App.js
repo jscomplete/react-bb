@@ -15,6 +15,11 @@ class App extends Component {
   static propTypes = {
     deals: PropTypes.array.isRequired,
   };
+
+  componentWillUpdate() {
+    console.log('App Updated');
+  }
+
   render() {
     return (
       <div className="App">
