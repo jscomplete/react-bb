@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect } from '../my-redux';
 
 import { hideDeal } from '../store/actions';
 
@@ -12,6 +12,7 @@ class HideDeal extends React.Component {
 
   handleClick = () => {
     this.props.hideDeal(this.props.dealId);
+    // store.dispatch(hideDeal(this.props.dealId));
   };
 
   render() {

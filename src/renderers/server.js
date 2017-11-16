@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import axios from 'axios';
 
 // import './index.css';

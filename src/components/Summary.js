@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect } from '../my-redux';
 
 export const Summary = ({ numberOfDeals }) => (
   <div>Total number of deals: {numberOfDeals}</div>
