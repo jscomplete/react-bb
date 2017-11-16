@@ -24,15 +24,15 @@ export const connect = (
   const _mapStateToProps = mapStateToProps ? mapStateToProps : () => ({});
   const _mapDispatchToProps = mapDispatchToProps ? mapDispatchToProps : {};
 
-  return class extends React.Component {
+  return class extends React.PureComponent {
     static displayName = `Connect(${WrappedComponent.name})`;
 
     static contextTypes = {
       store: PropTypes.object.isRequired,
     };
 
-    constructor(props) {
-      super(props);
+    constructor(props, context) {
+      super(props, context);
       this.actionsMap = {};
       Object.entries(_mapDispatchToProps).forEach(
         ([actionName, actionFunction]) => {
@@ -40,6 +40,7 @@ export const connect = (
             this.context.store.dispatch(actionFunction.apply(this, args));
         }
       );
+      this.state = this.propsMap(context);
     }
 
     componentDidMount() {
@@ -51,13 +52,13 @@ export const connect = (
     }
 
     onStoreChange = () => {
-      this.forceUpdate(); // TODO: optimize
+      this.setState(() => this.propsMap(this.context));
     };
 
-    render() {
-      const propsMap = _mapStateToProps(this.context.store.getState());
+    propsMap = (context) => _mapStateToProps(context.store.getState());
 
-      return <WrappedComponent {...this.props} {...propsMap} {...this.actionsMap} />;
+    render() {
+      return <WrappedComponent {...this.props} {...this.state} {...this.actionsMap} />;
     }
   };
 };
