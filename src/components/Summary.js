@@ -2,15 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-export class Summary extends React.Component {
-  static propTypes = {
-    numberOfDeals: PropTypes.number.isRequired,
-  };
+export const Summary = ({ numberOfDeals }) => (
+  <div>Total number of deals: {numberOfDeals}</div>
+);
 
-  render() {
-    return <div>Total number of deals: {this.props.numberOfDeals}</div>;
-  }
-}
+Summary.propTypes = {
+  numberOfDeals: PropTypes.number.isRequired,
+};
 
 export default connect((state) => ({
   numberOfDeals: state.deals.length,

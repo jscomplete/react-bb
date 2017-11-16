@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary works 1`] = `
+<div>
+  Total number of deals: 
+  42
+</div>
+`;
