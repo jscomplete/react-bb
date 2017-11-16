@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import { connect } from '../my-redux';
 
 // import { incrementCounter, decrementCounter } from '../store/actions';
 // import './App.css';
@@ -34,4 +34,18 @@ const mapStateToProps = (state) => ({
   deals: state.deals,
 });
 
-export default connect(mapStateToProps, {})(App);
+export default class extends React.Component {
+  static displayName = 'Connect(App)';
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired,
+  };
+
+  render() {
+    const propsMap = mapStateToProps(this.context.store.getState());
+
+    return <App {...propsMap} />;
+  }
+}
+
+// export default connect(mapStateToProps, {})(App);
