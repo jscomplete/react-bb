@@ -5,6 +5,9 @@ const mainReducer = (state, action) => {
         ...state,
         deals: state.deals.filter((deal) => deal.key !== action.dealId),
       };
+      // return state.set(
+      //   deals, state.deals.filter((deal) => deal.key !== action.dealId)
+      // );
     case 'TICK_TIME':
       return {
         ...state,
