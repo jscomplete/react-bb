@@ -17,8 +17,10 @@ export class Provider extends React.Component {
   }
 }
 
-
-export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponent) => {
+export const connect = (
+  mapStateToProps,
+  mapDispatchToProps
+) => (WrappedComponent) => {
   const _mapStateToProps = mapStateToProps ? mapStateToProps : () => ({});
   const _mapDispatchToProps = mapDispatchToProps ? mapDispatchToProps : {};
 
@@ -39,18 +41,19 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponen
 
     onStoreChange = () => {
       this.forceUpdate(); // TODO: optimize
-    }
+    };
 
     render() {
       const propsMap = _mapStateToProps(this.context.store.getState());
-      const actionsMap = _mapDispatchToProps
-      // { hideDeal: hideDeal }
-      // {
-      //   hideDeal: () => this.context.store.dispatch(hideDeal(...args)),
-      // }
+      const actionsMap = {};
+      Object.entries(_mapDispatchToProps).forEach(
+        ([actionName, actionFunction]) => {
+          actionsMap[actionName] = (...args) =>
+            this.context.store.dispatch(actionFunction.apply(this, args));
+        }
+      );
 
-      return <WrappedComponent {...this.props} {...propsMap} />;
+      return <WrappedComponent {...this.props} {...propsMap} {...actionsMap} />;
     }
   };
-
 };
